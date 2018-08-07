@@ -1,0 +1,63 @@
+00100000000010000000000000001010
+00100000000010010000000000001010
+00100000000010100000000000001010
+00100000000010110000000000001010
+00001000000000000000000000000111
+00000000000000000000000000000000
+00001000000000000000000000000101
+00100001010010101111111111111111
+00000001010000000111000000101010
+00010000000011101111111111111101
+00100000000010100000000000001010
+00100001001010011111111111111111
+00000001001000000110100000101010
+00010000000011011111111111111001
+00100000000010010000000000001010
+00100001011010111111111111111111
+00000001011000000111100000101010
+00010000000011111111111111111101
+00100000000010110000000000001010
+00100001000010001111111111111111
+00000001000000000110000000101010
+00010000000011001111111111110001
+00001000000000000000000000011000
+00001000000000000000000000000101
+00100000000110000000110101011101
+10101100000110000000000100000000
+00001000000000000000000000000101
+
+
+//Instruction Address, Label      Instruction                     Comment
+//-------------------------------------------------------------------------------------------------------
+//  0x00                          addi    $t0, $0, 10            //set $t0 to 10 : $t4
+//  0x01                          addi    $t1, $0, 10            //set $t1 to 10 : $t5
+//  0x02                          addi    $t2, $0, 10            //set $t2 to 10 : $t6
+//  0x03                          addi    $t3, $0, 10            //set $t3 to 10 : $t7
+//  0x04                          j       Loop0                  //jump to loop body   
+//  0x05  Trap:                   nop                            //the program should never execute this instruction
+//  0x06                          j       Trap                   //a dead end trap
+//  0x07  Loop0,Loop1,Loop2:      addi    $t2, $t2, -1           //decrease &t0 by 1
+//  0x08                          slt     $t6, $t2, $0           //set $t6 to 1 if $t0 < 0
+//  0x09                          beq     $t6, $0, Loop2         //branch back to loop body if $t6 == 0
+//  0x0A                          addi    $t2, $0, 10            //set $t2 to 10 : $t6
+//  0x0B						  addi    $t1, $t1, -1           //decrease &t0 by 1
+//  0x0C                          slt     $t5, $t1, $0           //set $t5 to 1 if $t0 < 0
+//  0x0D                          beq     $t5, $0, Loop1         //branch back to loop body if $t5 == 0
+//  0x0E                          addi    $t1, $0, 10            //set $t1 to 10 : $t5
+//  0x0F  Loop3					  addi    $t3, $t3, -1           //decrease &t0 by 1
+//  0x10                          slt     $t7, $t3, $0           //set $t7 to 1 if $t0 < 0
+//  0x11                          beq     $t7, $0, Loop3         //branch back to loop body if $t7 == 0
+//  0x12                          addi    $t3, $0, 10            //set $t3 to 10 : $t7
+//  0x13						  addi    $t0, $t0, -1           //decrease &t0 by 1
+//  0x14                          slt     $t4, $t0, $0           //set $t1 to 1 if $t0 < 0
+//  0x15                          beq     $t4, $0, Loop0         //branch back to loop body if $t4 == 0
+//  0x16                          j       Endofloop              //jump to the end of the program
+//  0x17                          j       Trap                   //the program should never execute this instruction
+//  0x18  Endofloop:              addi    $t8, $0, 0xd5d         //change the value in $t2 into "D5D"
+//  0x19                          sw      $t8, $0, 0x0100        //store "D5D" into memory
+//  0x1A                          j       Trap                   //the program should never execute this instruction
+
+
+
+
+
